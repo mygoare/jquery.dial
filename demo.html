@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>KnobKnob</title>
+    <script src="http://cdn.staticfile.org/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.staticfile.org/normalize/3.0.0/normalize.min.css" media="all">
+
+    <script src="js/jquery.dial.js"></script>
+    <link rel="stylesheet" href="css/jquery.dial.css"/>
+    
+<!--    <script src="../jquery.transform/js/jquery.transform2d.js"></script> -->
+
+    <!-- css written smaple -->
+    <link rel="stylesheet" href="./knobKnob-style.css" media="all">
+</head>
+<body>
+<div id="elem1"></div>
+<br/>
+
+<div id="elem2"></div>
+<br/>
+
+<div id="elem3"></div>
+<br/>
+
+<div id="elem"></div>
+<script>
+    $("#elem1").dial({
+        angleOffset: -54,
+        angleArc: 288,
+        turn: function (ratio) {
+            console.log(ratio);
+        }
+    });
+    $("#elem2").dial({
+        angleOffset: -60,
+        angleArc   : 300,
+        value      : 10,
+        className  : 'arrow',
+        turn       : function (ratio, deg) {
+            console.log("Value => " + ratio + " deg -> " + deg);
+        },
+        change     : function (v) {
+            console.warn(v);
+        },
+        moveOrientation: "horizontal",
+        moveSensitivity: 100
+    });
+    $("#elem3").dial({
+        className: 'dot',
+        turn     : function (ratio) {
+            console.log(ratio);
+        }
+    });
+</script>
+<br/><br/><br/>
+
+
+<p>Css written smaple:</p>
+<div class="cxq-knobKnob">
+    <div class="cxq-knobKnob-rotate">
+        <div class="cxq-knobKnob-rotate-circle">
+            <div class="cxq-knobKnob-rotate-outer">
+                <div class="cxq-knobKnob-rotate-inner"></div>
+                <div class="cxq-knobKnob-rotate-pointer"></div>
+            </div>
+        </div>
+        <div class="cxq-knobKnob-rotate-arrow-wrapper">
+            <div class="cxq-knobKnob-rotate-arrow-color"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

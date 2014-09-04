@@ -1,0 +1,103 @@
+/*----------------------------
+	knobKnob Styles
+-----------------------------*/
+/*
+    .dial
+    |__.top
+    |__.base
+*/
+/*basic css style*/
+.dial {
+  width: 83px;
+  height: 83px;
+  position: relative;
+}
+.dial .top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  cursor: default !important;
+}
+.dial .base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.dial [draggable] {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*default css style*/
+.dial-default {
+  width: 83px;
+  height: 83px;
+}
+.dial-default .top {
+  width: 83px;
+  height: 83px;
+  background: url('../images/dial-default-rotate.png') no-repeat;
+}
+.dial-default .top:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: #666;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  cursor: default !important;
+  -webkit-box-shadow: 0 0 1px #5a5a5a inset;
+  box-shadow: 0 0 1px #5a5a5a inset;
+}
+.dial-default .base {
+  width: 83px;
+  height: 83px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 5px 0 #4a5056,5px 5px 5px #000;
+  box-shadow: 0 5px 0 #4a5056,5px 5px 5px #000;
+}
+/*custom dot css style*/
+.dial-dot {
+  width: 101px;
+  height: 102px;
+}
+.dial-dot .top {
+  width: 100px;
+  height: 100px;
+  background: url('../images/dial-dot-s-rotate.png') no-repeat;
+}
+.dial-dot .base {
+  width: 101px;
+  height: 102px;
+  background: url('../images/dial-dot-s-base.png') no-repeat;
+}
+/*custom arrow css style*/
+.dial-arrow {
+  width: 110px;
+  height: 100px;
+}
+.dial-arrow .top {
+  width: 110px;
+  height: 110px;
+  background: url('../images/dial-arrow-s-rotate.png') no-repeat center;
+  top: -5px;
+  -ms-filter: drop-shadow(0 0 2px #cccccc);
+  -webkit-filter: drop-shadow(0 0 2px #cccccc);
+  filter: drop-shadow(0 0 2px #cccccc);
+}
+.dial-arrow .base {
+  width: 92px;
+  height: 92px;
+  border-radius: 92px;
+  background: #eeeeee url('../images/dial-arrow-s-base.png') no-repeat center;
+  -webkit-box-shadow: 0 0 5px 0 #cccccc;
+  box-shadow: 0 0 5px 0 #cccccc;
+  top: 4px;
+  left: 9px;
+}
