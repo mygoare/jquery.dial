@@ -47,6 +47,10 @@
         this.options = $.extend({}, $.fn.dial.defaultSettings, settings || {});
 
         this.snap = this.options.angleArc / ( this.options.piece || (this.options.max - this.options.min) );
+
+        //  rateLimit
+        this.rateLimitFlag = true;
+        this.timer = null;
     }
 
     Dial.prototype =
@@ -156,7 +160,11 @@
 
             // calculate value
             this.calVal();
-            this.options.turn(this.v, this.currentDeg);
+            var turn = function()
+            {
+                this.options.turn(this.v, this.currentDeg)
+            };
+            this.rate(turn.bind(this));
         },
         bind: function()
         {
@@ -239,6 +247,25 @@
             }
 
         },
+        rate: function(cb)
+        {
+            var _this = this,
+                rateLimitValue = _this.options.rateLimit;
+
+            if (!_this.timer)
+            {
+                _this.timer = setTimeout(function(){
+                    _this.rateLimitFlag = true;
+                    _this.timer = null;
+                }, rateLimitValue);
+            }
+
+            if (_this.rateLimitFlag)
+            {
+                _this.rateLimitFlag = false;
+                cb();
+            }
+        },
         destroy: function()
         {
             this.el.empty().removeData('dial');
@@ -265,22 +292,23 @@
 
     $.fn.dial.defaultSettings =
     {
-        min            : 0,
-        max            : 100,
-        angleOffset    : 0,  // it is a value between -180 ~ 180
-        angleArc       : 360,
-        className      : "default",
-        value          : 0,
-        turn           : function (value, deg) {
+        min             : 0,
+        max             : 100,
+        angleOffset     : 0,  // it is a value between -180 ~ 180
+        angleArc        : 360,
+        className       : "default",
+        value           : 0,
+        turn            : function (value, deg) {
         },
-        change         : function (value, deg) {
+        change          : function (value, deg) {
         },
-        init           : function (percent) {
+        init            : function (percent) {
 
         },  // do something third part needs
-        moveOrientation: "rotate",  // horizontal, vertical
-        mouseWheel     : true,
-        moveSensitivity: 20  // number smaller, changes moved more sensitive, must greater than 0
+        moveOrientation : "rotate",  // horizontal, vertical
+        mouseWheel      : true,
+        rateLimit       : 400,
+        moveSensitivity : 20  // number smaller, changes moved more sensitive, must greater than 0
     };
 
 })(jQuery);
