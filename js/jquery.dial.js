@@ -49,7 +49,6 @@
         this.snap = this.options.angleArc / ( this.options.piece || (this.options.max - this.options.min) );
 
         //  rateLimit
-        this.rateLimitFlag = true;
         this.timer = null;
     }
 
@@ -254,16 +253,11 @@
 
             if (!_this.timer)
             {
-                _this.timer = setTimeout(function(){
-                    _this.rateLimitFlag = true;
+                _this.timer = setTimeout(function()
+                {
+                    cb();
                     _this.timer = null;
                 }, rateLimitValue);
-            }
-
-            if (_this.rateLimitFlag)
-            {
-                _this.rateLimitFlag = false;
-                cb();
             }
         },
         destroy: function()
