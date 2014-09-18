@@ -1,6 +1,6 @@
 /*
 
- Modified by Mesheven, repo url: https://github.com/mygoare/dial
+ Modified by Mesheven, repo url: https://github.com/mygoare/jquery.dial
 
  Optimize the plugin based on: http://www.websanova.com/blog/jquery/10-coding-tips-to-write-superior-jquery-plugins#.UwsRSUKSxgs
 
