@@ -1,27 +1,8 @@
-/**
- * @name		jQuery Dial plugin
- * @author		Martin Angelov
- * @version 	1.0
- * @url			http://tutorialzine.com/2011/11/pretty-switches-css3-jquery/
- * @license		MIT License
- */
-
 /*
 
- Modified by Mesheven, repo url: https://github.com/mygoare/KnobKnob
+ Modified by Mesheven, repo url: https://github.com/mygoare/dial
 
  Optimize the plugin based on: http://www.websanova.com/blog/jquery/10-coding-tips-to-write-superior-jquery-plugins#.UwsRSUKSxgs
-
- Some updates:
- 1.  Make the plugin with OOP mode
- 2.  Add two more themes
- 3.  add `rotate` method to change the rotate value dynamic
-
- 4.  add angleOffset, angleArc, min, max parameters
- 5.  this.options.$ stands for $(element)
-
- 6.  options.piece make the snap feature
- 7.  options.moveSensitivity
 
  */
 
@@ -34,6 +15,8 @@
         this.currentDeg = 0;
         this.v = 0;
         this.doc = $(document);
+
+        this.$el = null;
         this.el = null;
 
         // moveOrientation horizontal or vertical
@@ -54,20 +37,23 @@
 
     Dial.prototype =
     {
-        generate: function(el)
+        generate: function(element)
         {
+            this.$el = $(element);
+            this.el  = element;
             var tpl = '<div class="dial">\
                            <div class="top"></div>\
                            <div class="base"></div>\
                        </div>';
 
-            el.append(tpl);
-            this.dial = $('.dial', el);
+            this.$el.append(tpl);
+            this.dial = $('.dial', this.$el);
             this.dialTop = this.dial.find('.top');
             this.dial.addClass('dial-' + this.options.className);
-            this.el = this.options.$ = el;
 
             this.init(this.options.value);
+
+            return this;
         },
         init: function(v)
         {
@@ -262,26 +248,29 @@
         },
         destroy: function()
         {
-            this.el.empty().removeData('dial');
-            delete this.el[0].el;
+            this.$el.empty().removeData('dial');
+            // delete element.$el sign
+            delete this.el.$el;
         }
     };
 
     $.fn.dial = function(props, settings)
     {
-        return this.each(function()
-        {
-            var dial = new Dial(props, settings);
-
-            if (!this.el)
+        return this.each(
+            function(index, element)
             {
-                this.el = $(this);
-                dial.generate(this.el);
-                dial.bind();
+                var dial = new Dial(props, settings);
 
-                this.el.data('dial', dial);
+                if (!this.$el)
+                {
+                    this.$el = $(this);
+                    dial.generate(this)
+                        .bind();
+
+                    this.$el.data('dial', dial);
+                }
             }
-        });
+        );
     };
 
     $.fn.dial.defaultSettings =
