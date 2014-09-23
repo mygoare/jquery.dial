@@ -164,6 +164,7 @@
             this.dial.on('mousedown touchstart', function(e)
             {
                 e.preventDefault();
+                if (e.button == 2) return;
                 e = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
 
                 switch (_this.options.moveOrientation)
