@@ -10,6 +10,8 @@
 
     function Dial(props, settings)
     {
+        this.version = '0.0.1';
+
         this.dial = null;
         this.dialTop = null;
         this.currentDeg = 0;
