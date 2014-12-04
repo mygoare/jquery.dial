@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>KnobKnob</title>
+
+    <!-- jquery & normalize -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.staticfile.org/normalize/3.0.0/normalize.min.css" media="all">
+
+    <!-- jquery.dial js & css -->
+    <script src="js/jquery.dial.js"></script>
+    <link rel="stylesheet" href="css/jquery.dial.css"/>
+</head>
+<style>
+    .clearfix:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+    .clearfix { display: inline-block; }
+    /* start commented backslash hack \*/
+    * html .clearfix { height: 1%; }
+    .clearfix { display: block; }
+    /* close commented backslash hack */
+
+    .demo
+    {
+        float: left;
+        margin: 10px;
+    }
+</style>
+<body>
+<h1>jQuery.dial</h1>
+<div class="clearfix">
+    <h2>Features: </h2>
+    <ul>
+        <li>
+            <h4>Min, Max & Default value:</h4>
+        </li>
+        <li>
+            <h4>Angle Offset & Angle Arc:</h4>
+
+        </li>
+        <li>
+            <h4>Themes:</h4>
+
+            <div class="clearfix">
+                <div class="demo" id="s1"></div>
+                <div class="demo" id="s2"></div>
+                <div class="demo" id="s3"></div>
+            </div>
+        </li>
+        <li>
+            <h4>Events:</h4>
+
+        </li>
+        <li>
+            <h4>Control orientation:</h4>
+
+        </li>
+        <li>
+            <h4>Mouse Wheel Support:</h4>
+
+        </li>
+        <li>
+            <h4>Update Rate:</h4>
+
+        </li>
+        <li>
+            <h4>Control Sensitivity (Can use to control small value changes):</h4>
+
+        </li>
+    </ul>
+
+
+
+</div>
+
+<div class="clearfix">
+    <h1>Tests: </h1>
+    <div class="demo" id="elem1"></div>
+    <div class="demo" id="elem2"></div>
+    <div class="demo" id="elem3"></div>
+    <div class="demo" id="elem"></div>
+</div>
+
+<script>
+    //    Samples
+    $("#s1").dial(
+            {
+                className: 'default'
+            }
+    );
+    $("#s2").dial(
+            {
+                className: 'dot'
+            }
+    );
+    $("#s3").dial(
+            {
+                className: 'arrow'
+            }
+    );
+
+    //    Tests
+    $("#elem1").dial({
+        angleOffset: -54,
+        angleArc: 288,
+        turn: function (ratio) {
+            console.log(ratio);
+        },
+        change: function(v)
+        {
+            console.warn(v);
+        }
+    });
+    $("#elem2").dial({
+        angleOffset: -60,
+        angleArc   : 300,
+        value      : 10,
+        className  : 'arrow',
+        turn       : function (ratio, deg) {
+            console.log("Value => " + ratio + " deg -> " + deg);
+        },
+        change     : function (v) {
+            console.warn(v);
+        },
+        moveOrientation: "horizontal",
+        moveSensitivity: 100
+    });
+    $("#elem3").dial({
+        className: 'dot',
+        turn     : function (ratio) {
+            console.log(ratio);
+        }
+    });
+</script>
+</body>
+</html>
