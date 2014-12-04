@@ -107,7 +107,7 @@
                 a = center.y - e.pageY;
                 b = center.x - e.pageX;
                 deg = Math.atan2(a,b)*rad2deg;  // -180 ~ 180 degree
-//console.error(center, e.pageX, e.pageY, deg);
+                //console.error(center, e.pageX, e.pageY, deg);
 
                 var buffer = (360 - this.options.angleArc) / 2;
                 // console.error(deg);
@@ -125,7 +125,6 @@
             else if (moveOrientation === "vertical")
             {
                 deg = this.currentDeg;
-                console.log(this.currentDeg);
                 deg += (e.pageY - this.pos) * this.snap / Math.abs(this.options.moveSensitivity);
                 this.pos = e.pageY;
             }
@@ -280,21 +279,17 @@
     {
         min             : 0,
         max             : 100,
-        angleOffset     : 0,  // it is a value between -180 ~ 180
-        angleArc        : 360,
-        className       : "default",
-        value           : 0,
-        turn            : function (value, deg) {
-        },
-        change          : function (value, deg) {
-        },
-        init            : function (percent) {
-
-        },  // do something third part needs
-        moveOrientation : "rotate",  // horizontal, vertical
-        mouseWheel      : true,
-        rateLimit       : 400,
-        moveSensitivity : 20  // number smaller, changes moved more sensitive, must greater than 0
+        angleOffset     : 0,                            // A value between -180 ~ 180
+        angleArc        : 360,                          // The whole angle arc that dial can rotate
+        className       : "default",                    // Theme
+        value           : 0,                            // Default value
+        turn            : function (value, deg) {},     // Trigger when dial rotating
+        change          : function (value, deg) {},     // Trigger when value changed
+        init            : function (percent)    {},     // Do something third part needs when initialize
+        moveOrientation : "rotate",                     // Rotate, horizontal or vertical
+        mouseWheel      : true,                         // Enable or disable mouse wheel event
+        rateLimit       : 400,                          // Control update rate
+        moveSensitivity : 20                            // Number smaller, changes moved more sensitive, must greater than 0
     };
 
 })(jQuery);
