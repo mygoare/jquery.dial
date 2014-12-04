@@ -39,7 +39,7 @@
 
     Dial.prototype =
     {
-        generate: function(element)
+        generate    : function(element)
         {
             this.$el = $(element);
             this.el  = element;
@@ -57,7 +57,7 @@
 
             return this;
         },
-        init: function(v)
+        init        : function(v)
         {
             if (typeof v !== 'number' && v < this.options.min && v > this.options.max)
             {
@@ -74,7 +74,7 @@
             // 给第三方初始化使用
             this.options.init(v / (this.options.max - this.options.min));
         },
-        rotate: function(d)
+        rotate      : function(d)
         {
             if (d < 0)
             {
@@ -83,12 +83,12 @@
 
             this.dialTop.css('transform','rotate('+(d)+'deg)');
         },
-        calVal: function()
+        calVal      : function()
         {
             this.v = (this.currentDeg - this.options.angleOffset) / this.options.angleArc * (this.options.max - this.options.min) + this.options.min;
             this.v = Math.round(this.v);
         },
-        clickRotate: function(e, rad2deg, offset, endDeg)
+        clickRotate : function(e, rad2deg, offset, endDeg)
         {
             e = (e.originalEvent.touches) ? e.originalEvent.touches[0] : e;
 
@@ -153,7 +153,7 @@
             };
             this.rate(turn.bind(this));
         },
-        bind: function()
+        bind        : function()
         {
             var _this = this;
 
@@ -235,7 +235,7 @@
             }
 
         },
-        rate: function(cb)
+        rate        : function(cb)
         {
             var _this = this,
                 rateLimitValue = _this.options.rateLimit;
@@ -249,7 +249,7 @@
                 }, rateLimitValue);
             }
         },
-        destroy: function()
+        destroy     : function()
         {
             this.$el.empty().removeData('dial');
             // delete element.$el sign
