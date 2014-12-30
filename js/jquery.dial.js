@@ -53,13 +53,16 @@
             this.dialTop = this.dial.find('.top');
             this.dial.addClass('dial-' + this.options.className);
 
-            this.init(this.options.value);
+            this.updateDial(this.options.value);
+
+            // 给第三方初始化使用
+            this.options.init(this.options.value / (this.options.max - this.options.min));
 
             return this;
         },
-        init        : function(v)
+        updateDial  : function(v)
         {
-            if (typeof v !== 'number' && v < this.options.min && v > this.options.max)
+            if (typeof v !== 'number' || v < this.options.min || v > this.options.max)
             {
                 return false;
             }
@@ -70,9 +73,6 @@
 
             this.currentDeg = d; // init need
             this.rotate(d);
-
-            // 给第三方初始化使用
-            this.options.init(v / (this.options.max - this.options.min));
         },
         rotate      : function(d)
         {
@@ -289,7 +289,8 @@
         moveOrientation : "rotate",                     // Rotate, horizontal or vertical
         mouseWheel      : true,                         // Enable or disable mouse wheel event
         rateLimit       : 400,                          // Control update rate
-        moveSensitivity : 20                            // Number smaller, changes moved more sensitive, must greater than 0
+        moveSensitivity : 20,                           // Number smaller, changes moved more sensitive, must greater than 0
+        readOnly        : false
     };
 
 })(jQuery);
