@@ -10,7 +10,7 @@
 
     function Dial(props, settings)
     {
-        this.version = '0.0.1';
+        this.version = '0.0.2';
 
         this.dial = null;
         this.dialTop = null;
@@ -58,11 +58,20 @@
             // 给第三方初始化使用
             this.options.init(this.options.value / (this.options.max - this.options.min));
 
+            if (this.options.readOnly)
+            {
+                this.$el.css('pointer-events', 'none');
+            }
+
             return this;
         },
         updateDial  : function(v)
         {
-            if (typeof v !== 'number' || v < this.options.min || v > this.options.max)
+            if (typeof v !== 'number')
+            {
+                v = 0
+            }
+            else if (v < this.options.min || v > this.options.max)
             {
                 return false;
             }
