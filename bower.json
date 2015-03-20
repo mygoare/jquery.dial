@@ -1,0 +1,26 @@
+{
+  "name": "jquery.dial",
+  "version": "0.0.2",
+  "homepage": "https://github.com/mygoare/jquery.dial",
+  "authors": [
+    "mygoare <mygoare@gmail.com>"
+  ],
+  "description": "Dial jquery plugin",
+  "main": "js/jquery.dial.js",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "dial"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.1.0"
+  }
+}
